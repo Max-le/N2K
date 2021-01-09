@@ -23,7 +23,7 @@
     "theme_color": "#3367D6",
     "share_target":
     {
-      "action": "/share",
+      "action": "/",
       "method": "GET",
       "params":
       {

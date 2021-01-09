@@ -11,7 +11,18 @@
 </head>
 <body>
     <h1>Hello world 👋</h1>
-    <pre id="log">v1.0</pre>
+    <pre id="version">v1.1</pre>
+    <h2>Log : </h2>
+    <pre id="log"></pre>
+    
+
+    <script>
+        var parsedUrl = new URL(window.location.toString());
+console.log('Title shared: ' + parsedUrl.searchParams.get('name'));
+console.log('Text shared: ' + parsedUrl.searchParams.get('description'));
+console.log('URL shared: ' + parsedUrl.searchParams.get('link'));
+document.getElementById("log").innerHTML = parsedUrl;
+    </script>
     
     <script>
         console.log("Hello world !")
