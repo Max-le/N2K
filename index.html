@@ -18,10 +18,26 @@
 
     <script>
         var parsedUrl = new URL(window.location.toString());
-console.log('Title shared: ' + parsedUrl.searchParams.get('title'));
-console.log('Text shared: ' + parsedUrl.searchParams.get('text'));
-document.getElementById("log").innerHTML += parsedUrl.searchParams.get('title')+ "\n";
-document.getElementById("log").innerHTML += parsedUrl.searchParams.get('text');
+        console.log('Title shared: ' + parsedUrl.searchParams.get('title'));
+        console.log('Text shared: ' + parsedUrl.searchParams.get('text'));
+        document.getElementById("log").innerHTML += parsedUrl.searchParams.get('title')+ "\n";
+        document.getElementById("log").innerHTML += parsedUrl.searchParams.get('text');
+
+        var apiAWS = "https://bhn3zq0bak.execute-api.us-east-1.amazonaws.com/dev/sendtokindle?q="
+        let linkArticle = parsedUrl.searchParams.get('text');
+        var xmlHttp = new XMLHttpRequest();
+
+
+        xmlHttp.open("GET", apiAWS+linkArticle)
+        console.log("request to "+apiAWS+linkArticle)
+        if (linkArticle != null) {
+            xmlHttp.send();
+        }
+        console.log(xmlHttp.response)
+
+
+
+
 
     </script>
     
