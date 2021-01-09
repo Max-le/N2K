@@ -18,10 +18,11 @@
 
     <script>
         var parsedUrl = new URL(window.location.toString());
-console.log('Title shared: ' + parsedUrl.searchParams.get('name'));
-console.log('Text shared: ' + parsedUrl.searchParams.get('description'));
-console.log('URL shared: ' + parsedUrl.searchParams.get('link'));
-document.getElementById("log").innerHTML = parsedUrl;
+console.log('Title shared: ' + parsedUrl.searchParams.get('title'));
+console.log('Text shared: ' + parsedUrl.searchParams.get('text'));
+document.getElementById("log").innerHTML += parsedUrl.searchParams.get('title')+ "\n";
+document.getElementById("log").innerHTML += parsedUrl.searchParams.get('text');
+
     </script>
     
     <script>
