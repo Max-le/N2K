@@ -11,14 +11,15 @@
 </head>
 <body>
     <h1>Hello world 👋</h1>
-    <pre id="log"></pre>
+    <pre id="log">v1.0</pre>
     
     <script>
+        console.log("Hello world !")
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('service-worker.js')
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('DOMContentLoaded', () => {
   const parsedUrl = new URL(window.location);
   // searchParams.get() will properly handle decoding the values.
   console.log('Title shared: ' + parsedUrl.searchParams.get('title'));
