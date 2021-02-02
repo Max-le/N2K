@@ -25,6 +25,7 @@
     <!-- <button onclick="openNetlifyWidget()" id="loginbutton">Login</button> -->
     
     <button id="login-form" onclick="openNetlifyWidget()">Login / Logout</button>
+    <strong id='warning'>You must be logged in order to send an article.</strong>
     
     <pre id="version">v1.1</pre>
     <h2>Log : </h2>
@@ -46,9 +47,8 @@
             }
         }
         
-        const user = netlifyIdentity.currentUser();
-        console.log('current user :', user)
-        greetUser(user)
+
+        greetUser(netlifyIdentity.currentUser())
         
         netlifyIdentity.on('init', user => {
             console.log('init. User :', user)
@@ -74,9 +74,10 @@
 
         if( getSharedURLfromIntent() ) {
             if (netlifyIdentity.currentUser() == null) {
-                alert('You must be logged in to use to send.')
+                document.getElementById('warning').style.display = "block";
                 openNetlifyWidget()
             } else {
+                document.getElementById('warning').style.display = "none";
                 sendRequestToAWS(getSharedURLfromIntent());
             }
 
