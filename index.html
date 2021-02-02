@@ -66,6 +66,11 @@
 
         });
 
+        netlifyIdentity.on('logout', user => {
+            console.log('Logout');
+            greetUser(user)
+        })
+
 
         if( getSharedURLfromIntent() ) {
             if (user == null) {
