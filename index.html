@@ -73,8 +73,9 @@
 
 
         if( getSharedURLfromIntent() ) {
-            if (user == null) {
+            if (netlifyIdentity.currentUser() == null) {
                 alert('You must be logged in to use to send.')
+                openNetlifyWidget()
             } else {
                 sendRequestToAWS(getSharedURLfromIntent());
             }
