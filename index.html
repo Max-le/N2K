@@ -48,6 +48,7 @@
         
         const user = netlifyIdentity.currentUser();
         console.log('current user :', user)
+        greetUser(user)
         
         netlifyIdentity.on('init', user => {
             console.log('init. User :', user)
@@ -56,6 +57,7 @@
                 document.getElementById('login-form').style.display = 'block';
             }else {
                 console.log('Welcome back, '+user);
+                document.getElementById('login-form').style.display = 'none';
                 greetUser(user)
             }
         });
@@ -65,21 +67,33 @@
             greetUser(user)
 
         });
+
+
+        if( getSharedURLfromIntent() ) {
+            if (user == null) {
+                alert('You must be logged in to use to send.')
+            } else {
+                sendRequestToAWS(getSharedURLfromIntent());
+            }
+
+        }
         
         
         function getSharedURLfromIntent(){
-            var parsedUrl = new URL(window.location.toString());
+            let parsedUrl = new URL(window.location.toString());
             console.log('Title shared: ' + parsedUrl.searchParams.get('title'));
             console.log('Text shared: ' + parsedUrl.searchParams.get('text'));
             document.getElementById("log").innerHTML += parsedUrl.searchParams.get('title')+ "\n";
             document.getElementById("log").innerHTML += parsedUrl.searchParams.get('text');
+
+            return parsedUrl.searchParams.get('text');
+
         }
         
         
-        function sendRequestToAWS() {
+        function sendRequestToAWS(linkArticle) {
             
             var apiAWS = "https://bhn3zq0bak.execute-api.us-east-1.amazonaws.com/dev/sendtokindle?q="
-            let linkArticle = parsedUrl.searchParams.get('text');
             var xmlHttp = new XMLHttpRequest();
             
             xmlHttp.open("GET", apiAWS+linkArticle)
