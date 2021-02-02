@@ -24,7 +24,7 @@
     -->
     <!-- <button onclick="openNetlifyWidget()" id="loginbutton">Login</button> -->
     
-    <button id="login-form" onclick="openNetlifyWidget()">Login with Netlify Identity</button>
+    <button id="login-form" onclick="openNetlifyWidget()">Login / Logout</button>
     
     <pre id="version">v1.1</pre>
     <h2>Log : </h2>
@@ -41,7 +41,7 @@
             if (user == null){
                 document.getElementById('greeting').innerHTML = "You're not logged in."
             } else {
-                document.getElementById('greeting').innerHTML = "Welcome back, "+ user
+                document.getElementById('greeting').innerHTML = "Welcome back, "+ user.e.email
                 
             }
         }
