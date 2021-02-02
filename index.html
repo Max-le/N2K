@@ -41,7 +41,7 @@
             if (user == null){
                 document.getElementById('greeting').innerHTML = "You're not logged in."
             } else {
-                document.getElementById('greeting').innerHTML = "Welcome back, "+ user.e.email
+                document.getElementById('greeting').innerHTML = "Welcome back, "+ user.user_metadata.full_name
                 
             }
         }
@@ -61,7 +61,7 @@
         });
         
         netlifyIdentity.on('login', user => {
-            console.log('Login succesfull for', user.email);
+            console.log('Login succesfull for', user);
             greetUser(user)
 
         });
