@@ -5,40 +5,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-
-
+    
+    
     <link rel="manifest" href="manifest.json">
+    
+    <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    
 </head>
 <body>
-    <h1>Hello world 👋</h1>
+    
+    <h1>Hello👋</h1>
+    <h2>Thanks for using N2K.</h2>
+    
+    <!-- Add a simpler button:
+        Simple button that will open the modal.
+    -->
+    <!-- <button onclick="openNetlifyWidget()" id="loginbutton">Login</button> -->
+
+    <div id="login-form" data-netlify-identity-button>Login with Netlify Identity</div>
+
     <pre id="version">v1.1</pre>
     <h2>Log : </h2>
     <pre id="log"></pre>
     
-
+    
     <script>
+
+        function openNetlifyWidget() {
+            console.log("Button clicked.")
+        }
+
+        const user = netlifyIdentity.currentUser();
+        console.log('current user :', user)
+
+        netlifyIdentity.on('init', user => {
+            console.log('init. User :', user)
+            //User is not logged in
+            if (user == null) {
+                document.getElementById('login-form').style.display = 'block';
+            }else {
+                console.log('Welcome back, '+user);
+            }
+        });
+
+        netlifyIdentity.on('login', user => {
+            console.log('Login succesfull for', user);
+        });
+        
+        
+        
         var parsedUrl = new URL(window.location.toString());
         console.log('Title shared: ' + parsedUrl.searchParams.get('title'));
         console.log('Text shared: ' + parsedUrl.searchParams.get('text'));
         document.getElementById("log").innerHTML += parsedUrl.searchParams.get('title')+ "\n";
         document.getElementById("log").innerHTML += parsedUrl.searchParams.get('text');
-
+        
         var apiAWS = "https://bhn3zq0bak.execute-api.us-east-1.amazonaws.com/dev/sendtokindle?q="
         let linkArticle = parsedUrl.searchParams.get('text');
         var xmlHttp = new XMLHttpRequest();
-
-
+        
+        
         xmlHttp.open("GET", apiAWS+linkArticle)
         console.log("request to "+apiAWS+linkArticle)
         if (linkArticle != null) {
             xmlHttp.send();
         }
-        console.log(xmlHttp.response)
-
-
-
-
-
+        console.log("Response :", xmlHttp.response)
+        
+        
+        
+        
+        
     </script>
     
     <script>
@@ -46,7 +83,7 @@
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('service-worker.js')
         }
-
+        
     </script>
 </body>
 </html>
