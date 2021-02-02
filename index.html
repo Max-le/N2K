@@ -61,7 +61,7 @@
         });
         
         netlifyIdentity.on('login', user => {
-            console.log('Login succesfull for', user);
+            console.log('Login succesfull for', user.email);
             greetUser(user)
 
         });
