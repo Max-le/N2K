@@ -54,10 +54,8 @@
             console.log('init. User :', user)
             //User is not logged in
             if (user == null) {
-                document.getElementById('login-form').style.display = 'block';
             }else {
                 console.log('Welcome back, '+user);
-                document.getElementById('login-form').style.display = 'none';
                 greetUser(user)
             }
         });
