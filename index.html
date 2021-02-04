@@ -15,115 +15,25 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     
 </head>
-<body>
+<body onload="greetUser()">
     
     <div class="container">
-        <h1>Hello👋</h1>
+        <h1>📘 News2kindle 📘</h1>
         <h2>Thanks for using N2K.</h2>
         
         <p id="greeting"></p>
+        <p id="articleShared"></p>
         
         <!-- Add a simpler button:
             Simple button that will open the modal.
         -->
         <!-- <button onclick="openNetlifyWidget()" id="loginbutton">Login</button> -->
-        
-        <button type="button" class="btn btn-light" id="login-form" onclick="openNetlifyWidget()">Login / Logout</button>
-        <strong style="display: none;" id='warning'>You must be logged in order to send an article.</strong>
-        
-        <p id="log"></p>
-        
+        <button type="button" class="btn btn-light" id="login-form" onclick="openNetlifyWidget()">Login - Signup</button>
+                
     </div>
     
     <script>
-        
-        function openNetlifyWidget() {
-            netlifyIdentity.open();
-        }
-        
-        function greetUser(user){
-            if (user == null){
-                document.getElementById('greeting').innerHTML = "You're not logged in."
-            } else {
-                document.getElementById('greeting').innerHTML = "Welcome back, "+ user.user_metadata.full_name
-                
-            }
-        }
-        
-        
-        greetUser(netlifyIdentity.currentUser())
-        
-        netlifyIdentity.on('init', user => {
-            console.log('init. User :', user)
-            //User is not logged in
-            if (user == null) {
-            }else {
-                console.log('Welcome back, '+user);
-                greetUser(user)
-            }
-        });
-        
-        netlifyIdentity.on('login', user => {
-            console.log('Login succesfull for', user);
-            greetUser(user)
-            
-        });
-        
-        netlifyIdentity.on('logout', user => {
-            console.log('Logout');
-            greetUser(user)
-        })
-        
-        
-        if( getArticleLinkFromShareIntent() ) {
-            if (netlifyIdentity.currentUser() == null) {
-                alert("Please login to perform this action.");
-                openNetlifyWidget()
-            } else {
-                sendRequestToAWS(getArticleLinkFromShareIntent());
-            }
-            
-        }
-        
-        
-        function getArticleLinkFromShareIntent(){
-            let parsedUrl = new URL(window.location.toString());
-            let articleTitle = parsedUrl.searchParams.get('title')
-            let articleLink = parsedUrl.searchParams.get('text')
-            console.log('Title shared: ' + articleTitle );
-            console.log('Text shared: ' + articleLink );
-
-            if (articleTitle){
-                document.getElementById("log").innerHTML = "Sharing " + articleTitle;
-            }
-
-            return articleLink ;
-            
-            
-        }
-        
-        
-        function sendRequestToAWS(linkArticle) {
-            
-            var apiAWS = "https://bhn3zq0bak.execute-api.us-east-1.amazonaws.com/dev/sendtokindle?q="
-            var xmlHttp = new XMLHttpRequest();
-            
-            xmlHttp.open("GET", apiAWS+linkArticle)
-            console.log("request to "+apiAWS+linkArticle)
-            if (linkArticle != null) {
-                xmlHttp.send();
-            }
-            console.log("Response :", xmlHttp.response)
-            
-        }
-        
-        
-        
-        
-        
-        
-        
-        
+     
     </script>
     
     <script>
@@ -133,5 +43,7 @@
         }
         
     </script>
+
+    <script src="app.js"></script>
 </body>
 </html>
