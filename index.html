@@ -17,6 +17,41 @@
 </head>
 <body onload="greetUser()">
     
+      <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-database.js"></script>
+    
+    <!-- Initialize Firebase  -->
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyD5Dr9BnQRxLL7FO_K6LFwMzVBZW74pbOM",
+            authDomain: "n2kindle.firebaseapp.com",
+            databaseURL: "https://n2kindle-default-rtdb.firebaseio.com",
+            projectId: "n2kindle",
+            storageBucket: "n2kindle.appspot.com",
+            messagingSenderId: "431949843021",
+            appId: "1:431949843021:web:6b1cca50ac9cae7b632a04",
+            measurementId: "G-4PQ3M2E51G"
+        };
+        
+        firebase.initializeApp(firebaseConfig);
+        
+    </script>
+
+    <!-- Database usage -->
+    <script>
+        var database = firebase.database();
+        function writeUserData(userNetlifyId, kindlemail) {
+            firebase.database().ref('users/'+userNetlifyId).set({
+                kindlemail:kindlemail
+            })
+        }
+
+
+        writeUserData("c4767403-d18d-4d96-9976-54b36cbc17dd", "max.mail@kindle.com")
+    </script>
+    
+    
     <div class="container">
         <h1>📘 News2kindle 📘</h1>
         <h2>Thanks for using N2K.</h2>
@@ -29,11 +64,11 @@
         -->
         <!-- <button onclick="openNetlifyWidget()" id="loginbutton">Login</button> -->
         <button type="button" class="btn btn-light" id="login-form" onclick="openNetlifyWidget()">Login - Signup</button>
-                
+        
     </div>
     
     <script>
-     
+        
     </script>
     
     <script>
@@ -43,7 +78,7 @@
         }
         
     </script>
-
+    
     <script src="app.js"></script>
 </body>
 </html>
