@@ -66,7 +66,7 @@ function getArticleLinkFromShareIntent(){
     console.log('Text shared: ' + articleLink );
     
     if (articleTitle){
-        document.getElementById("articleShared").innerHTML = "Sharing " + articleTitle;
+        document.getElementById("articleShared").innerHTML =  "The article \n\""+articleTitle+"\" was sent ✔";
     }
     
     return articleLink ;
